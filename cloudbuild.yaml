@@ -37,7 +37,7 @@ steps:
         '--platform', 'managed',
         '--region', 'us-central1',
         '--allow-unauthenticated',
-        '--logging=NONE'
+        '--logging=CLOUD_LOGGING_ONLY'
       ]
 
 images:
