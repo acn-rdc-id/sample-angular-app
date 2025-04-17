@@ -36,7 +36,8 @@ steps:
         '--image', 'gcr.io/genuine-vent-457105-i4/sample-angular-app',
         '--platform', 'managed',
         '--region', 'us-central1',
-        '--allow-unauthenticated'
+        '--allow-unauthenticated',
+        '--set-env-vars', 'GOOGLE_CLOUD_DISABLE_GOOGLE_LOGGING=1'
       ]
 
 images:
