@@ -29,7 +29,7 @@ steps:
 
   # Step 5: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud',
+    entrypoint: 'gcloud'
     args:
       [
         'run', 'deploy', 'angular-app',
