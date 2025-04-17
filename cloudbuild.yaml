@@ -37,7 +37,7 @@ steps:
         '--platform', 'managed',
         '--region', 'us-central1',
         '--allow-unauthenticated',
-        '--set-env-vars', 'GOOGLE_CLOUD_DISABLE_GOOGLE_LOGGING=1'
+        '--logging=NONE'
       ]
 
 images:
