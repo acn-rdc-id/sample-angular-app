@@ -1,10 +1,45 @@
 steps:
+# Step 1: Install dependencies using Node 22
+- name: 'node:22'
+  entrypoint: 'npm'
+  args: ['ci']
 
-- name: gcr.io/cloud-builders/npm
-  args: [ install ]
+# Step 2: Build Angular app
+- name: 'node:22'
+  entrypoint: 'npm'
+  args: ['run', 'build', '--omit=dev']
 
-- name: gcr.io/cloud-builders/npm
-  args: [ run, build, --prod ]
+# Step 3: Build Docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    [
+      'buildx',
+      'build',
+      '--platform',
+      'linux/amd64',
+      '-t',
+      'gcr.io/genuine-vent-457105-i4/sample-angular',
+      '.'
+    ]
 
-- name: gcr.io/cloud-builders/gcloud
-  args: [ app, deploy ]
+# Step 4: Push Docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    [
+      'push',
+      'gcr.io/genuine-vent-457105-i4/sample-angular'
+    ]
+
+# Step 5: Deploy to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  args:
+    [
+      'run', 'deploy', 'angular-app',
+      '--image', 'gcr.io/genuine-vent-457105-i4/sample-angular',
+      '--platform', 'managed',
+      '--region', 'us-central1',
+      '--allow-unauthenticated'
+    ]
+images:
+  - gcr.io/genuine-vent-457105-i4/sample-angular
