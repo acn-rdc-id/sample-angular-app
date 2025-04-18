@@ -20,6 +20,6 @@ EXPOSE 8080
 
 # Copy built app from Stage 1
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /app/dist/sample-angular /usr/share/nginx/html
+COPY --from=builder /app/dist/sample-angular/browser /usr/share/nginx/html
 
 # CMD ["nginx", "-g", "daemon off;"]
